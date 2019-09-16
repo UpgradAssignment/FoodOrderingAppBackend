@@ -4,17 +4,32 @@ package com.upgrad.FoodOrderingApp.api;
 import com.upgrad.FoodOrderingApp.service.ServiceConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Import;
+import org.springframework.stereotype.Component;
+
+import java.util.Collections;
 
 /**
- * A Configuration class that can declare one or more @Bean methods and trigger auto-configuration and component scanning.
+ *  A Configuration class that can declare one or more @Bean methods and trigger auto-configuration and component scanning.
  * This class launches a Spring Application from Java main method.
  */
 @SpringBootApplication
 @Import(ServiceConfiguration.class)
 public class FoodOrderingAppApiApplication {
     public static void main(String[] args) {
-        SpringApplication.run(FoodOrderingAppApiApplication.class, args);
+        SpringApplication mainApplication = new SpringApplication(FoodOrderingAppApiApplication.class);
+        mainApplication.setDefaultProperties(Collections.singletonMap("server.port","8086"));
+        mainApplication.run(args);
     }
 }
 
+@Component
+class CustomPort implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
+
+    @Override
+    public void customize(ConfigurableWebServerFactory factory) {
+        factory.setPort(8086);
+    }
+}
