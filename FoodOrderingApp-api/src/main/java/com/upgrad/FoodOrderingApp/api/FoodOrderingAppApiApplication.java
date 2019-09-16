@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 
 /**
- * A Configuration class that can declare one or more @Bean methods and trigger auto-configuration and component scanning.
+ *  A Configuration class that can declare one or more @Bean methods and trigger auto-configuration and component scanning.
  * This class launches a Spring Application from Java main method.
  */
 @SpringBootApplication
